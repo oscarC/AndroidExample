@@ -90,7 +90,7 @@ public class Listuser extends ListActivity  {
 		  setListAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,array));
           getListView().setTextFilterEnabled(true);
           
-		  HttpClient client = new DefaultHttpClient();
+		  /*HttpClient client = new DefaultHttpClient();
           HttpGet post = new HttpGet("http://192.168.1.6:9292/test");
           post.setHeader("Accept", "application/json");
           post.setHeader("Content-type", "application/json");
@@ -122,7 +122,7 @@ public class Listuser extends ListActivity  {
 				e.printStackTrace();
 			} catch (JSONException e) {
 				e.printStackTrace();
-			}
+			}*/
 			 
 	}
 	

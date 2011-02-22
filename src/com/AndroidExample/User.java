@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 public class User extends Activity {
 	
@@ -27,9 +28,11 @@ public class User extends Activity {
 	  private String name;
 	  private EditText username;
 	public void onCreate(Bundle savedInstanceState)
-    {
-       
-        super.onCreate(savedInstanceState);
+    {   super.onCreate(savedInstanceState);
+		TextView textview = new TextView(this);
+        textview.setText("This is the Almbum tab");
+        setContentView(textview);
+      /*  super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
         
         Bundle bundle = getIntent().getExtras();
@@ -67,7 +70,7 @@ public class User extends Activity {
             public void onClick(View v) {
             	Back();
            }
-        });
+        });*/
     }
 	
 	
