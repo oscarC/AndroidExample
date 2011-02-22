@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent">
+	<EditText android:layout_width="284px" android:id="@+id/username"
+		android:text="EditText" android:layout_x="10dip"
+		android:layout_height="wrap_content" android:layout_y="34dip"></EditText>
+	<Button android:layout_width="wrap_content" android:text="Button"
+		android:id="@+id/back" android:layout_height="wrap_content"
+		android:layout_x="12dip" android:layout_y="84dip"></Button>
+	<ListView android:id="@+id/user_list" android:layout_height="37px" android:layout_width="wrap_content" android:layout_x="4dip" android:layout_y="157dip"></ListView>
+</AbsoluteLayout>
