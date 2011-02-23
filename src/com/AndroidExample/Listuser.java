@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;  
 import org.json.JSONException;  
 import org.json.JSONObject;  
@@ -25,6 +26,7 @@ import com.google.gson.GsonBuilder;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
+import android.sax.Element;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.view.LayoutInflater;
@@ -39,6 +41,7 @@ import android.widget.Toast;
 
 public class Listuser extends ListActivity  {
 	
+
 	public ArrayList<String> UserList = new ArrayList<String>();
 	public HashMap<String, String> Object = new HashMap<String, String>();
 	
@@ -87,11 +90,12 @@ public class Listuser extends ListActivity  {
 		  String json = new Gson().toJson(array);
           // De-serialise
 		  String[] array2 = new Gson().fromJson(json,String[].class);
-		  setListAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,array));
-          getListView().setTextFilterEnabled(true);
+		 // setListAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,array));
+         // getListView().setTextFilterEnabled(true);
           
-		  /*HttpClient client = new DefaultHttpClient();
-          HttpGet post = new HttpGet("http://192.168.1.6:9292/test");
+		  MyHttpClient client = new MyHttpClient(this);
+		  
+          HttpGet post = new HttpGet("https://ec2-50-17-248-68.compute-1.amazonaws.com/api/deals?auth_token=UZF6T4p3ax2-FxiJO_74");
           post.setHeader("Accept", "application/json");
           post.setHeader("Content-type", "application/json");
           post.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
@@ -103,17 +107,15 @@ public class Listuser extends ListActivity  {
 				HttpEntity entity = reponse.getEntity();
 				if (entity != null) {
 	                InputStream instream = entity.getContent();
-	                JSONObject jsonResponse = new JSONObject(convertStreamToString(instream)); 
-	                JSONArray json_resul = jsonResponse.getJSONArray("user");  
-	                instream.close();
+	                 JSONArray jsonResponse = new JSONArray(convertStreamToString(instream)); 
+	                   instream.close();
+	                   for(int i=0;i<jsonResponse.length();i++) {
+	                    JSONObject jsonObj = jsonResponse.getJSONObject(i);
+	                    JSONObject Deals =jsonObj.getJSONObject("deal");
+	                    UserList.add(Deals.getString("product_id"));
+	                   }
 	                
-	                for(int i=0;i<json_resul.length();i++) {
-	                    JSONObject jsonObj = json_resul.getJSONObject(i);
-	                    String name = jsonObj.getString("name");
-	                    UserList.add(name); 
-	     
-	                }
-	                //setListAdapter(new MyCustomAdapter(this, R.layout.row, UserList));  
+	                 setListAdapter(new MyCustomAdapter(this, R.layout.row, UserList));  
 	               
 	            }
 			} catch (ClientProtocolException e) {
@@ -122,7 +124,7 @@ public class Listuser extends ListActivity  {
 				e.printStackTrace();
 			} catch (JSONException e) {
 				e.printStackTrace();
-			}*/
+			}
 			 
 	}
 	
